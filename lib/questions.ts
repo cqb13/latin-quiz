@@ -62,6 +62,24 @@ const questions: Question[] = [
     question: "Every island had large boats.",
     type: QuestionType.TrueFalse,
     answer: false
+  },
+  {
+    question: "What construction is placandum in \“...ad serenissimum Regem nostrum placandum…\”.",
+    type: QuestionType.MultipleChoice,
+    choices: ["Gerund", "Gerundive", "Perfect passive participle", "Present active participle"],
+    correctChoiceIndex: 1,
+  },
+  {
+    question: "What characteristics are the same between people?",
+    type: QuestionType.MultipleChoice,
+    choices: ["Thought, emotion, behavior", "Culture, language, cognition", "Form, habit, speech", "DNA, growth, mortality"],
+    correctChoiceIndex: 2,
+  },
+  {
+    question: "What construction is endurandam in \“...quia Indi proni erunt ad sanctam Christi fidem conversionem endurandam\”.",
+    type: QuestionType.MultipleChoice,
+    choices: ["Gerund", "Gerundive", "Perfect passive participle", "Present active participle"],
+    correctChoiceIndex: 1,
   }
 ];
 
