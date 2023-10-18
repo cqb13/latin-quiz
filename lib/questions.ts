@@ -88,12 +88,6 @@ const questions: Question[] = [
     correctChoiceIndex: 3,
   },
   {
-    question: ["Columbus", "said", "the", "natives", "are", "not", "", "or", ""],
-    type: QuestionType.FillInTheBlank,
-    answers: ["slow", "wild"],
-    ending: ".",
-  },
-  {
     question: "How many islands did Columbus sail to?",
     type: QuestionType.MultipleChoice,
     choices: ["Innumerable", "Fifty", "Thousands", "Hundreds"],
@@ -106,9 +100,25 @@ const questions: Question[] = [
     correctChoiceIndex: 2,
   },
   {
+    question: ["Columbus", "said", "the", "natives", "are", "not", "", "or", ""],
+    type: QuestionType.FillInTheBlank,
+    answers: ["slow", "wild"],
+    ending: ".",
+  },
+  {
     question: "Translate: \"In omnibus his insulis nulla est diversitas inter gentis effigies nulla, in moribus atque loquela\".",
     type: QuestionType.ShortAnswer,
     answer: "In all these islands there is no difference between the form of people, no difference in habits and speech."
+  },
+  {
+    question: "Translate: \"Haec res pertutilis est, reor, ad serenissimum Regem nostrum placandum, quia Indi proni erunt ad sanctum Christi fidem conversionem endurandam.\".",
+    type: QuestionType.ShortAnswer,
+    answer: "."
+  },
+  {
+    question: "Translate: \"Brevi tempore nos ipsos et hi nos gestu ac signis, tum verbis, intellexerunt.\".",
+    type: QuestionType.ShortAnswer,
+    answer: "In a short time they themselves understood us through gestures and signs, then words."
   }
 ];
 
