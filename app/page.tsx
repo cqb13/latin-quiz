@@ -2,7 +2,6 @@
 
 import Question from "@/components/question";
 import questions, { QuestionType } from "@/lib/questions";
-import getQuestions from "@/utils/getQuestions";
 import { useState, useEffect } from "react";
 
 export default function Home() {
@@ -32,10 +31,6 @@ export default function Home() {
         ]);
       }
     });
-
-    //getQuestions().then((questions) => {
-    //  console.log(questions);
-    //});
   }, []);
 
   const updateQuestionResults = (index: number, result: boolean) => {
@@ -63,7 +58,7 @@ export default function Home() {
   };
 
   return (
-    <main className='flex flex-col gap-10 px-60 py-20 bg-gray bg-opacity-30'>
+    <main className='flex flex-col gap-10 px-60 py-20 bg-gray bg-opacity-30 max-lg:px-14 max-sm:px-5'>
       {questions.map((question, index) => (
         <Question
           question={question}

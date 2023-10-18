@@ -241,10 +241,10 @@ export default function Question({
       ) : null}
 
       {question.type === QuestionType.FillInTheBlank ? (
-        <section className='flex gap-2'>
+        <section className='flex gap-2 max-sm:flex-col'>
           {question.type === QuestionType.FillInTheBlank
             ? question.answers.map((answer, answerIndex) => (
-                <div key={answerIndex} className='w-1/2 relative'>
+                <div key={answerIndex} className='w-1/2 relative max-sm:w-full'>
                   <input
                     type='text'
                     value={blankInputs[answerIndex]}
