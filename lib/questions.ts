@@ -39,26 +39,29 @@ export enum QuestionType {
 
 const questions: Question[] = [
   {
-    question: "What is the capital of France?",
-    type: QuestionType.MultipleChoice,
-    choices: ["London", "Paris", "Rome", "Madrid"],
-    correctChoiceIndex: 1
+    question: "The natives have seen clothes and ships like those of Columbus.",
+    type: QuestionType.TrueFalse,
+    answer: false
   },
   {
-    question: "Why am I here?",
-    type: QuestionType.ShortAnswer,
-    answer: "Why not."
-  },
-  {
-    question: "Is this a question?",
+    question: "The natives admired what Columbus shared or communicated with them.",
     type: QuestionType.TrueFalse,
     answer: true
   },
   {
-    question: ["This", "is", "a", ""],
-    ending: ".",
-    type: QuestionType.FillInTheBlank,
-    answers: ["placeholder"],
+    question: "The natives were not able to understand Columbus\' people.",
+    type: QuestionType.TrueFalse,
+    answer: false
+  },
+  {
+    question: "The small boats were guided with one ore.",
+    type: QuestionType.TrueFalse,
+    answer: false
+  },
+  {
+    question: "Every island had large boats.",
+    type: QuestionType.TrueFalse,
+    answer: false
   }
 ];
 
