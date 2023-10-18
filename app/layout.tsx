@@ -30,8 +30,8 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${inter.className} bg-lavender_blush`}>
-        <header className='h-[90vh] bg-gunmetal p-24'>
-          <h1 className='font-signika text-non_photo_blue text-9xl'>
+        <header className='h-[90vh] bg-gunmetal p-24 max-md:px-10 max-md:text-left max-sm:h-[60vh]'>
+          <h1 className='font-signika text-non_photo_blue text-9xl max-md:text-8xl max-sm:text-7xl'>
             Latin Quiz
           </h1>
           <sub className='font-signika text-gray text-3xl'>
