@@ -88,7 +88,7 @@ const questions: Question[] = [
     correctChoiceIndex: 3,
   },
   {
-    question: ["Columbus", "said", "the", "natives", "are", "not", "", "or", "wild"],
+    question: ["Columbus", "said", "the", "natives", "are", "not", "", "or", ""],
     type: QuestionType.FillInTheBlank,
     answers: ["slow", "wild"],
     ending: ".",
@@ -105,6 +105,11 @@ const questions: Question[] = [
     choices: ["In a few hours", "A long time", "A short time", "In a few days"],
     correctChoiceIndex: 2,
   },
+  {
+    question: "Translate: \"In omnibus his insulis nulla est diversitas inter gentis effigies nulla, in moribus atque loquela\".",
+    type: QuestionType.ShortAnswer,
+    answer: "In all these islands there is no difference between the form of people, no difference in habits and speech."
+  }
 ];
 
 export default questions;
