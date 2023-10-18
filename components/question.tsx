@@ -6,10 +6,14 @@ import { QuestionType, Question } from "@/lib/questions";
 export default function Question({
   question,
   submitted,
+  updateQuestionResults,
+  attempts,
   index
 }: {
   question: Question;
   submitted: boolean;
+  updateQuestionResults: (index: number, result: boolean) => void;
+  attempts: number;
   index: number;
 }) {
   const [selectAnswerIndex, setSelectAnswerIndex] = useState<number>();
@@ -27,7 +31,49 @@ export default function Question({
         setSelectAnswerIndex(1);
       }
     }
-  }, [question, submitted]);
+  }, [question]);
+
+  useEffect(() => {
+    if (submitted === true) {
+      if (question.type === QuestionType.MultipleChoice) {
+        if (selected === question.correctChoiceIndex) {
+          updateQuestionResults(index, true);
+        } else {
+          updateQuestionResults(index, false);
+        }
+      } else if (question.type === QuestionType.TrueFalse) {
+        if (selected === 0 && question.answer === true) {
+          updateQuestionResults(index, true);
+        } else if (selected === 1 && question.answer === false) {
+          updateQuestionResults(index, true);
+        } else {
+          updateQuestionResults(index, false);
+        }
+      } else if (question.type === QuestionType.ShortAnswer) {
+        if (response === question.answer) {
+          updateQuestionResults(index, true);
+        } else {
+          updateQuestionResults(index, false);
+        }
+      } else if (question.type === QuestionType.FillInTheBlank) {
+        let correct = true;
+        question.answers.forEach((answer, answerIndex) => {
+          if (answer !== blankInputs[answerIndex]) {
+            correct = false;
+          }
+        });
+        updateQuestionResults(index, correct);
+      }
+    }
+  }, [submitted]);
+
+  useEffect(() => {
+    if (attempts > 0) {
+      setSelected(undefined);
+      setResponse("");
+      setBlankInputs([]);
+    }
+  }, [attempts]);
 
   const handleSelect = (index: number) => {
     if (submitted) return;
@@ -51,12 +97,27 @@ export default function Question({
     setBlankInputs(newBlankInputs);
   };
 
-  const replaceBlankWord = (word: string, wordIndex: number) => {
+  const replaceBlankWord = (
+    word: string,
+    wordIndex: number,
+    submitted: boolean
+  ) => {
     if (question.type !== QuestionType.FillInTheBlank) return;
     let newWord = word;
 
-    if (word === "") {
+    if (word === "" && !submitted) {
       newWord = "____";
+    } else if (word === "" && submitted) {
+      const answers = question.answers;
+
+      let count = 0;
+      for (let i = 0; i < wordIndex; i++) {
+        if (question.question[i] === "") {
+          count++;
+        }
+      }
+
+      newWord = answers[count];
     }
 
     if (question.question.length - 1 === wordIndex) {
@@ -74,11 +135,11 @@ export default function Question({
           {question.question.map((word, wordIndex) => (
             <h2
               key={index}
-              className={`${
-                word === "" ? "" : "font-belgrano"
+              className={`${word === "" && !submitted ? "" : "font-belgrano"} ${
+                word === "" && submitted ? "text-green-700" : ""
               } text-2xl text-black`}
             >
-              {replaceBlankWord(word, wordIndex)}
+              {replaceBlankWord(word, wordIndex, submitted)}
             </h2>
           ))}
         </div>
@@ -101,11 +162,11 @@ export default function Question({
                     answerIndex == selectAnswerIndex &&
                     submitted &&
                     selected !== answerIndex
-                      ? "text-green-500"
+                      ? "text-green-700"
                       : ""
                   } ${
                     selected == answerIndex
-                      ? "text-non_photo_blue"
+                      ? "text-non_photo_blue-200"
                       : "text-lavender_blush"
                   } font-belgrano text-xl`}
                 >
@@ -118,15 +179,21 @@ export default function Question({
 
       <section>
         {question.type === QuestionType.ShortAnswer ? (
-          <textarea
-            className='w-full rounded-3xl bg-gunmetal placeholder-gray text-lavender_blush font-belgrano p-4'
-            placeholder='Type your answer here...'
-            cols={30}
-            rows={10}
-            onChange={handleResponse}
-          >
-            {response}
-          </textarea>
+          <div className='w-full relative'>
+            <textarea
+              className='w-full rounded-3xl bg-gunmetal placeholder-gray text-lavender_blush font-belgrano p-4'
+              placeholder='Type your answer here...'
+              cols={30}
+              rows={10}
+              onChange={handleResponse}
+              value={response}
+            />
+            {submitted ? (
+              <h2 className='absolute bottom-6 left-6 text-green-700 font-belgrano text-xl'>
+                {question.answer}
+              </h2>
+            ) : null}
+          </div>
         ) : null}
       </section>
 
@@ -140,10 +207,12 @@ export default function Question({
             <h2
               className={`${
                 0 == selectAnswerIndex && submitted && selected !== 0
-                  ? "text-green-500"
+                  ? "text-green-700"
                   : ""
               } ${
-                selected == 0 ? "text-non_photo_blue" : "text-lavender_blush"
+                selected == 0
+                  ? "text-non_photo_blue-200"
+                  : "text-lavender_blush"
               } font-belgrano text-xl`}
             >
               True
@@ -157,10 +226,12 @@ export default function Question({
             <h2
               className={`${
                 1 == selectAnswerIndex && submitted && selected !== 1
-                  ? "text-green-500"
+                  ? "text-green-700"
                   : ""
               }${
-                selected == 1 ? "text-non_photo_blue" : "text-lavender_blush"
+                selected == 1
+                  ? "text-non_photo_blue-200"
+                  : "text-lavender_blush"
               } font-belgrano text-xl`}
             >
               False
@@ -173,14 +244,20 @@ export default function Question({
         <section className='flex gap-2'>
           {question.type === QuestionType.FillInTheBlank
             ? question.answers.map((answer, answerIndex) => (
-                <input
-                  type='text'
-                  value={blankInputs[answerIndex]}
-                  onChange={(event) => handleBlankUpdate(event, answerIndex)}
-                  className='w-1/2 rounded-3xl bg-gunmetal placeholder-gray text-lavender_blush font-belgrano p-4'
-                  placeholder='Type your answer here...'
-                  key={answerIndex}
-                />
+                <div key={answerIndex} className='w-1/2 relative'>
+                  <input
+                    type='text'
+                    value={blankInputs[answerIndex]}
+                    onChange={(event) => handleBlankUpdate(event, answerIndex)}
+                    className='w-full rounded-3xl bg-gunmetal placeholder-gray text-lavender_blush font-belgrano p-4'
+                    placeholder='Type your answer here...'
+                  />
+                  {answer !== blankInputs[answerIndex] && submitted ? (
+                    <h2 className='absolute top-3 right-6 text-green-700 font-belgrano text-xl'>
+                      {answer}
+                    </h2>
+                  ) : null}
+                </div>
               ))
             : null}
         </section>
