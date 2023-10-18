@@ -2,6 +2,7 @@
 
 import Question from "@/components/question";
 import questions, { QuestionType } from "@/lib/questions";
+import getQuestions from "@/utils/getQuestions";
 import { useState, useEffect } from "react";
 
 export default function Home() {
@@ -31,6 +32,10 @@ export default function Home() {
         ]);
       }
     });
+
+    //getQuestions().then((questions) => {
+    //  console.log(questions);
+    //});
   }, []);
 
   const updateQuestionResults = (index: number, result: boolean) => {
