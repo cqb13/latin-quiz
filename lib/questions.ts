@@ -80,7 +80,31 @@ const questions: Question[] = [
     type: QuestionType.MultipleChoice,
     choices: ["Gerund", "Gerundive", "Perfect passive participle", "Present active participle"],
     correctChoiceIndex: 1,
-  }
+  },
+  {
+    question: "What happened between Columbus and the natives? \“Cum his suam mercaturam exercent et inter eos commertia fiunt\”",
+    type: QuestionType.MultipleChoice,
+    choices: ["Fighting", "Nothing", "Peace", "Trade"],
+    correctChoiceIndex: 3,
+  },
+  {
+    question: ["Columbus", "said", "the", "natives", "are", "not", "", "or", "wild"],
+    type: QuestionType.FillInTheBlank,
+    answers: ["slow", "wild"],
+    ending: ".",
+  },
+  {
+    question: "How many islands did Columbus sail to?",
+    type: QuestionType.MultipleChoice,
+    choices: ["Innumerable", "Fifty", "Thousands", "Hundreds"],
+    correctChoiceIndex: 0,
+  },
+  {
+    question: "In what time were the natives able to understand Columbus",
+    type: QuestionType.MultipleChoice,
+    choices: ["In a few hours", "A long time", "A short time", "In a few days"],
+    correctChoiceIndex: 2,
+  },
 ];
 
 export default questions;
