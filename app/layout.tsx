@@ -34,12 +34,14 @@ export default function RootLayout({
           <h1 className='font-signika text-non_photo_blue text-9xl max-md:text-8xl max-sm:text-7xl'>
             Latin Quiz
           </h1>
-          <sub className='font-signika text-gray text-3xl'>
-            Columbus&rsquo; Parts Quarta et Pars Quinta
-          </sub>
-          <sub className='font-signika text-gray text-3xl'>
-            By: Maksim Straus, Eddie Kim, Emily Quan
-          </sub>
+          <div className='flex flex-col gap-2'>
+            <sub className='font-signika text-gray text-3xl'>
+              Columbus&rsquo; Parts Quarta et Pars Quinta
+            </sub>
+            <sub className='font-signika text-gray text-3xl'>
+              By: Maksim Straus, Eddie Kim, Emily Quan
+            </sub>
+          </div>
         </header>
         {children}
         <footer className='p-24 flex flex-col justify-center border-t-gray-800 border-t-2 bg-gray bg-opacity-30'>
