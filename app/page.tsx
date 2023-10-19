@@ -1,10 +1,11 @@
 "use client";
 
-import Question from "@/components/question";
-import questions, { QuestionType } from "@/lib/questions";
+import QuestionDisplay from "@/components/question";
+import questions, { QuestionType, Question } from "@/lib/questions";
 import { useState, useEffect } from "react";
 
 export default function Home() {
+  const [usedQuestions, setUsedQuestions] = useState<Question[]>([]);
   const [submitted, setSubmitted] = useState(false);
   const [questionResults, setQuestionResults] = useState<boolean[]>([]);
   const [absoluteResults, setAbsoluteResults] = useState<number>(0);
@@ -15,23 +16,32 @@ export default function Home() {
   const [attempts, setAttempts] = useState(0);
 
   useEffect(() => {
-    let tempAbsoluteResults = 0;
-    questions.forEach((question) => {
+    let tempUncertainResultsIndex: number[] = [];
+    for (let i = 0; i < questions.length; i++) {
       if (
-        question.type === QuestionType.MultipleChoice ||
-        question.type === QuestionType.TrueFalse ||
-        question.type === QuestionType.FillInTheBlank
+        questions[i].type === QuestionType.MultipleChoice ||
+        questions[i].type === QuestionType.TrueFalse ||
+        questions[i].type === QuestionType.FillInTheBlank
       ) {
-        tempAbsoluteResults++;
         setAbsoluteResults(absoluteResults + 1);
       } else {
-        setUncertainResultsIndex([
-          ...uncertainResultsIndex,
-          tempAbsoluteResults
-        ]);
+        tempUncertainResultsIndex.push(i);
       }
-    });
+    }
+    setUncertainResultsIndex(tempUncertainResultsIndex);
+    setUsedQuestions(shuffle(questions));
   }, []);
+
+  const shuffle = (array: any[]) => {
+    let tempArray = array;
+    for (let i = tempArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * i);
+      const temp = tempArray[i];
+      tempArray[i] = tempArray[j];
+      tempArray[j] = temp;
+    }
+    return tempArray;
+  };
 
   const updateQuestionResults = (index: number, result: boolean) => {
     const newQuestionResults = questionResults;
@@ -55,12 +65,15 @@ export default function Home() {
     setQuestionResults([]);
     setScore(0);
     setAttempts(attempts + 1);
+    setUsedQuestions(shuffle(questions));
+    //!!!: maybe make an id, and scroll to that id, if it does not work on smaller screens
+    window.scrollTo(0, 500);
   };
 
   return (
     <main className='flex flex-col gap-10 px-60 py-20 bg-gray bg-opacity-30 max-lg:px-14 max-sm:px-5'>
-      {questions.map((question, index) => (
-        <Question
+      {usedQuestions.map((question, index) => (
+        <QuestionDisplay
           question={question}
           submitted={submitted}
           updateQuestionResults={updateQuestionResults}

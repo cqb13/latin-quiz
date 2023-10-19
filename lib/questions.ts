@@ -44,19 +44,20 @@ const questions: Question[] = [
     answer: false
   },
   {
-    question: "The natives admired what Columbus shared or communicated with them.",
+    question:
+      "The natives admired what Columbus shared or communicated with them.",
     type: QuestionType.TrueFalse,
     answer: true
   },
   {
-    question: "The natives were not able to understand Columbus\' people.",
+    question: "The natives were not able to understand Columbus' people.",
     type: QuestionType.TrueFalse,
     answer: false
   },
   {
-    question: "The small boats were guided with one ore.",
+    question: "The boats were guided with two oars.",
     type: QuestionType.TrueFalse,
-    answer: false
+    answer: true
   },
   {
     question: "Every island had large boats.",
@@ -64,61 +65,94 @@ const questions: Question[] = [
     answer: false
   },
   {
-    question: "What construction is placandum in \“...ad serenissimum Regem nostrum placandum…\”.",
+    question:
+      "What construction is placandum in “...ad serenissimum Regem nostrum placandum…”.",
     type: QuestionType.MultipleChoice,
-    choices: ["Gerund", "Gerundive", "Perfect passive participle", "Present active participle"],
-    correctChoiceIndex: 1,
+    choices: [
+      "Gerund",
+      "Gerundive",
+      "Perfect passive participle",
+      "Present active participle"
+    ],
+    correctChoiceIndex: 1
   },
   {
-    question: "What characteristics are the same between people?",
+    question: "What characteristics are the same between the natives?",
     type: QuestionType.MultipleChoice,
-    choices: ["Thought, emotion, behavior", "Culture, language, cognition", "Form, habit, speech", "DNA, growth, mortality"],
-    correctChoiceIndex: 2,
+    choices: [
+      "Thought, emotion, behavior",
+      "Culture, language, cognition",
+      "Form, habit, speech",
+      "DNA, growth, mortality"
+    ],
+    correctChoiceIndex: 2
   },
   {
-    question: "What construction is endurandam in \“...quia Indi proni erunt ad sanctam Christi fidem conversionem endurandam\”.",
+    question:
+      "What construction is endurandam in “...quia Indi proni erunt ad sanctam Christi fidem conversionem endurandam”.",
     type: QuestionType.MultipleChoice,
-    choices: ["Gerund", "Gerundive", "Perfect passive participle", "Present active participle"],
-    correctChoiceIndex: 1,
+    choices: [
+      "Gerund",
+      "Gerundive",
+      "Perfect passive participle",
+      "Present active participle"
+    ],
+    correctChoiceIndex: 1
   },
   {
-    question: "What happened between Columbus and the natives? \“Cum his suam mercaturam exercent et inter eos commertia fiunt\”",
+    question:
+      "What happened between Columbus and the natives? “Cum his suam mercaturam exercent et inter eos commertia fiunt”",
     type: QuestionType.MultipleChoice,
     choices: ["Fighting", "Nothing", "Peace", "Trade"],
-    correctChoiceIndex: 3,
+    correctChoiceIndex: 3
   },
   {
     question: "How many islands did Columbus sail to?",
     type: QuestionType.MultipleChoice,
     choices: ["Innumerable", "Fifty", "Thousands", "Hundreds"],
-    correctChoiceIndex: 0,
+    correctChoiceIndex: 0
   },
   {
     question: "In what time were the natives able to understand Columbus",
     type: QuestionType.MultipleChoice,
     choices: ["In a few hours", "A long time", "A short time", "In a few days"],
-    correctChoiceIndex: 2,
+    correctChoiceIndex: 2
   },
   {
-    question: ["Columbus", "said", "the", "natives", "are", "not", "", "or", ""],
+    question: [
+      "Columbus",
+      "said",
+      "the",
+      "natives",
+      "are",
+      "not",
+      "",
+      "or",
+      ""
+    ],
     type: QuestionType.FillInTheBlank,
     answers: ["slow", "wild"],
-    ending: ".",
+    ending: "."
   },
   {
-    question: "Translate: \"In omnibus his insulis nulla est diversitas inter gentis effigies nulla, in moribus atque loquela\".",
+    question:
+      'Translate: "In omnibus his insulis nulla est diversitas inter gentis effigies nulla, in moribus atque loquela".',
     type: QuestionType.ShortAnswer,
-    answer: "In all these islands there is no difference between the form of people, no difference in habits and speech."
+    answer:
+      "In all these islands there is no difference between the form of people, no difference in habits and speech."
   },
   {
-    question: "Translate: \"Haec res pertutilis est, reor, ad serenissimum Regem nostrum placandum, quia Indi proni erunt ad sanctum Christi fidem conversionem endurandam.\".",
+    question:
+      'Translate: "Haec res pertutilis est, reor, ad serenissimum Regem nostrum placandum, quia Indi proni erunt ad sanctum Christi fidem conversionem endurandam.".',
     type: QuestionType.ShortAnswer,
     answer: "."
   },
   {
-    question: "Translate: \"Brevi tempore nos ipsos et hi nos gestu ac signis, tum verbis, intellexerunt.\".",
+    question:
+      'Translate: "Brevi tempore nos ipsos et hi nos gestu ac signis, tum verbis, intellexerunt.".',
     type: QuestionType.ShortAnswer,
-    answer: "In a short time they themselves understood us through gestures and signs, then words."
+    answer:
+      "In a short time they themselves understood us through gestures and signs, then words."
   }
 ];
 

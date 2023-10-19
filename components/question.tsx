@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { QuestionType, Question } from "@/lib/questions";
 
-export default function Question({
+export default function QuestionDisplay({
   question,
   submitted,
   updateQuestionResults,
@@ -158,16 +158,14 @@ export default function Question({
                 className='bg-gunmetal p-10 rounded-3xl cursor-pointer hover:bg-opacity-95 transition-all'
               >
                 <h2
-                  className={`${
+                  className={` ${
+                    selected == answerIndex ? "text-non_photo_blue-200" : ""
+                  } ${
                     answerIndex == selectAnswerIndex &&
                     submitted &&
                     selected !== answerIndex
                       ? "text-green-700"
                       : ""
-                  } ${
-                    selected == answerIndex
-                      ? "text-non_photo_blue-200"
-                      : "text-lavender_blush"
                   } font-belgrano text-xl`}
                 >
                   {answer}
@@ -210,9 +208,7 @@ export default function Question({
                   ? "text-green-700"
                   : ""
               } ${
-                selected == 0
-                  ? "text-non_photo_blue-200"
-                  : "text-lavender_blush"
+                selected == 0 ? "text-non_photo_blue-200" : ""
               } font-belgrano text-xl`}
             >
               True
@@ -229,9 +225,7 @@ export default function Question({
                   ? "text-green-700"
                   : ""
               }${
-                selected == 1
-                  ? "text-non_photo_blue-200"
-                  : "text-lavender_blush"
+                selected == 1 ? "text-non_photo_blue-200" : ""
               } font-belgrano text-xl`}
             >
               False
