@@ -37,6 +37,9 @@ export default function RootLayout({
           <sub className='font-signika text-gray text-3xl'>
             Columbus&rsquo; Parts Quarta et Pars Quinta
           </sub>
+          <sub className='font-signika text-gray text-3xl'>
+            By: Maksim Straus, Eddie Kim, Emily Quan
+          </sub>
         </header>
         {children}
         <footer className='p-24 flex flex-col justify-center border-t-gray-800 border-t-2 bg-gray bg-opacity-30'>
