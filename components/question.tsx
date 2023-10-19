@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { QuestionType, Question } from "@/lib/questions";
+import shuffle from "@/utils/shuffle";
 
 export default function QuestionDisplay({
   question,
@@ -17,13 +18,20 @@ export default function QuestionDisplay({
   index: number;
 }) {
   const [selectAnswerIndex, setSelectAnswerIndex] = useState<number>();
+  const [multipleChoiceAnswers, setMultipleChoiceAnswers] = useState<string[]>(
+    []
+  );
   const [blankInputs, setBlankInputs] = useState<string[]>([]);
   const [selected, setSelected] = useState<number>();
   const [response, setResponse] = useState<string>();
 
   useEffect(() => {
     if (question.type === QuestionType.MultipleChoice) {
-      setSelectAnswerIndex(question.correctChoiceIndex);
+      const newMultipleChoiceAnswers = shuffle([...question.choices]);
+      const correctAnswer = question.choices[question.correctChoiceIndex];
+      const correctIndex = newMultipleChoiceAnswers.indexOf(correctAnswer);
+      setMultipleChoiceAnswers(newMultipleChoiceAnswers);
+      setSelectAnswerIndex(correctIndex);
     } else if (question.type === QuestionType.TrueFalse) {
       if (question.answer === true) {
         setSelectAnswerIndex(0);
@@ -36,7 +44,7 @@ export default function QuestionDisplay({
   useEffect(() => {
     if (submitted === true) {
       if (question.type === QuestionType.MultipleChoice) {
-        if (selected === question.correctChoiceIndex) {
+        if (selected === selectAnswerIndex) {
           updateQuestionResults(index, true);
         } else {
           updateQuestionResults(index, false);
@@ -151,7 +159,7 @@ export default function QuestionDisplay({
 
       <section className='grid grid-cols-2 grid-rows-2 gap-2'>
         {question.type === QuestionType.MultipleChoice
-          ? question.choices.map((answer, answerIndex) => (
+          ? multipleChoiceAnswers.map((answer, answerIndex) => (
               <div
                 key={answerIndex}
                 onClick={() => handleSelect(answerIndex)}

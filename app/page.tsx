@@ -2,6 +2,7 @@
 
 import QuestionDisplay from "@/components/question";
 import questions, { QuestionType, Question } from "@/lib/questions";
+import shuffle from "@/utils/shuffle";
 import { useState, useEffect } from "react";
 
 export default function Home() {
@@ -31,17 +32,6 @@ export default function Home() {
     setUncertainResultsIndex(tempUncertainResultsIndex);
     setUsedQuestions(shuffle(questions));
   }, []);
-
-  const shuffle = (array: any[]) => {
-    let tempArray = array;
-    for (let i = tempArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * i);
-      const temp = tempArray[i];
-      tempArray[i] = tempArray[j];
-      tempArray[j] = temp;
-    }
-    return tempArray;
-  };
 
   const updateQuestionResults = (index: number, result: boolean) => {
     const newQuestionResults = questionResults;
